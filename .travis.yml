@@ -23,10 +23,10 @@ before_script:
 
   # create new site, stubbing sendmail path with true to prevent delivery errors and manually resolving drush path
   - mysql -e 'create database dkan_dataset_test'
-  - php -d sendmail_path=`which true` `pear config-get php_dir`/drush/drush.php --yes core-quick-drupal --profile=testing --no-server --db-url=mysql://root:@127.0.0.1/dkan_dataset_test --enable=simpletest dkan_dataset
+  - php -d sendmail_path=`which true` `pear config-get php_dir`/drush/drush.php --yes core-quick-drupal --profile=testing --no-server --db-url=mysql://root:@127.0.0.1/dkan_dataset_test --enable=simpletest dkan_dataset_test
 
   # reference and enable travis_ci_drupal_module_example in build site
-  - ln -s $(readlink -e $(cd -)) dkan_dataset/drupal/sites/all/modules/dkan_dataset
+  - cp -r dkan_dataset dkan_dataset_test/drupal/sites/all/modules/dkan_dataset
   - cd dkan_datset_test/drupal
   - drush --yes pm-enable dkan_dataset
 
